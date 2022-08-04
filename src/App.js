@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Search from "./components/Search";
 import Nav from "./components/Nav";
 import PhotoList from "./components/PhotoList";
 // import NotFound from './components/NotFound';
 import apiKey from "./components/config";
+import NotFound from "./components/NotFound";
 
 // const url =
 // `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`
@@ -16,12 +17,18 @@ export default class App extends Component {
     super();
     this.state = {
       photos: [],
-      loading:true,
+      dogs: [],
+      cats: [],
+      computers: [],
+      query: "",
+      loading: true,
     };
   }
   componentDidMount() {
-    this.performSearch(); 
-    // this.performSearch();
+    this.performSearch();
+    this.performSearch("cats");
+    this.performSearch("dogs");
+    this.performSearch("computers");
   }
 
   performSearch = (query = "cheese") => {
@@ -32,11 +39,28 @@ search&api_key=${apiKey}&tags={query}&per_page=24&format=json&
 nojsoncallback=1`
       )
       .then((response) => {
-        console.log(response.data.photos.photo);
-        this.setState({
-          photos: response.data.photos.photo,
-          loading:false,
-        });
+        if (query === "cats") {
+          this.setState({
+            cats: response.data.photos.photo,
+            loading: false,
+          });
+        } else if (query === "dogs") {
+          this.setState({
+            dogs: response.data.photos.photo,
+            loading: false,
+          });
+        } else if (query === "computers") {
+          this.setState({
+            computers: response.data.photos.photo,
+            loading: false,
+          });
+        } else  {
+          this.setState({
+            photos: response.data.photos.photo,
+            query:query,
+            loading: false,
+          });
+        }
       })
       .catch((error) => {
         console.log("Error fetching and parsing data", error);
@@ -48,17 +72,50 @@ nojsoncallback=1`
     return (
       <BrowserRouter>
         <div className="App">
-          <div className="container">
-            <Search onSearch={this.performSearch} />
-            <Nav />
-            {this.state.loading ? (
-              <p>Loading...</p>
-            ) : (
-              <PhotoList data={this.state.photos} />
-            )}
-            <Route exact path="/" render={() => <PhotoList />} />
-            <Route exact path="/search" render={() => <Search />} />
-          </div>
+          <Search onSearch={this.performSearch} />
+          <Nav />
+          {/* {this.state.loading ? ( 
+               <p>Loading...</p>
+             ) : */}
+          <Routes>
+            {/* <PhotoList data={this.state.photos} /> */}
+            <Route
+              exact
+              path="/"
+              element={
+                <PhotoList data={this.state.photos} title={this.state.query} />
+              }
+            />
+            <Route
+              exact
+              path="/cats"
+              element={
+                <PhotoList data={this.state.cats} title={this.state.query} />
+              }
+            />
+            <Route
+              exact
+              path="/dogs"
+              element={
+                <PhotoList data={this.state.dogs} title={this.state.query} />
+              }
+            />
+            <Route
+              exact
+              path="/computers"
+              element={
+                <PhotoList data={this.state.computers} title={this.state.query} />
+              }
+            />
+            <Route
+              exact
+              path="/:query"
+              element={
+                <PhotoList results={this.state.photos} title={null} />
+              }
+            />
+            <Route path="*"element={<NotFound/>}/>
+          </Routes>
         </div>
       </BrowserRouter>
     );

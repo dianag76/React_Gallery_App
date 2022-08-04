@@ -1,7 +1,6 @@
 import './App.css';
 import Search from "./components/Search";
 import Nav from "./components/Nav";
-import Photo from './components/Photo';
 import PhotoContainer from './components/PhotoContainer';
 import NotFound from './components/NotFound';
 
@@ -24,6 +23,8 @@ function App() {
   
       <div className="photo-container">
         <h2>Results</h2>
+        <PhotoContainer/>
+        <NotFound/>
       </div>
     </div>
     );

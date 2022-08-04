@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import './App.css';
 import Search from "./components/Search";
 import Nav from "./components/Nav";
-import PhotoContainer from './components/PhotoList';
+import PhotoList from './components/PhotoList';
 // import NotFound from './components/NotFound';
 import apiKey from "./components/config";
 import axios from "axios";
@@ -58,7 +58,7 @@ nojsoncallback=1`)
   
       <div className="photo-container">
         <h2>Results</h2>
-        <PhotoContainer/>
+        <PhotoList data={this.state.photos}/>
         {/* <NotFound/> */}
       </div>
     </div>

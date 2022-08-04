@@ -1,10 +1,21 @@
 import React, { Component } from "react";
 
 export default class Search extends Component{
-    state={
-
-    } 
-
+ state = {
+   searchText: ''
+ }
+ 
+ onSearchChange = e => {
+   this.setState({ searchText: e.target.
+value });
+ }
+ 
+ handleSubmit = e => {
+   e.preventDefault();
+   this.props.onSearch(this.state.
+searchText);
+   e.currentTarget.reset();
+ }
 
     render(){
 

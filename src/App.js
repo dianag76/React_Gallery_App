@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import './App.css';
 import Search from "./components/Search";
 import Nav from "./components/Nav";
-import PhotoContainer from './components/PhotoContainer';
+import PhotoContainer from './components/PhotoList';
 // import NotFound from './components/NotFound';
 import apiKey from "./components/config";
 import axios from "axios";

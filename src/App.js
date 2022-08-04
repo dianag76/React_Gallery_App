@@ -1,11 +1,18 @@
+import React, {Component} from "react";
 import './App.css';
 import Search from "./components/Search";
 import Nav from "./components/Nav";
 import PhotoContainer from './components/PhotoContainer';
 import NotFound from './components/NotFound';
 
+const url =`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`
 
-function App() {
+export default class App extends Component {
+  constructor(){
+  super();
+  }
+
+  render(){
   return (
     // lassName="App">
     // <Nav/> */} 
@@ -29,6 +36,5 @@ function App() {
     </div>
     );
 }
+}
 
-
-export default App;

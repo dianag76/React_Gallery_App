@@ -1,7 +1,7 @@
 import React from "react";
 import Photo from "./Photo"; 
 
-const PhotoContainer = (props)=>{
+const PhotoContainer = (props)=> {
     const results = props.data
     let photos;
      photos = results.map(photo=> (

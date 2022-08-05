@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import apiKey from "./components/config";
 import "./App.css";
 import Search from "./components/Search";
@@ -12,7 +12,7 @@ import NotFound from "./components/NotFound";
 // const url =
 // `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`
 
-export default class App extends Component {
+class App extends Component {
   constructor() {
     super();
     this.state = {
@@ -54,10 +54,10 @@ nojsoncallback=1`
             computers: response.data.photos.photo,
             loading: false,
           });
-        } else  {
+        } else {
           this.setState({
             photos: response.data.photos.photo,
-            query:query,
+            query: query,
             loading: false,
           });
         }
@@ -70,55 +70,53 @@ nojsoncallback=1`
   render() {
     console.log(this.state.photos);
     return (
-        <div className="App">
-          <Search onSearch={this.performSearch} />
-          <Nav />
-          {/* {this.state.loading ? ( 
+      <div className="App">
+        <Search onSearch={this.performSearch} />
+        <Nav />
+        {/* {this.state.loading ? ( 
                <p>Loading...</p>
              ) : */}
-          <Routes>
-            {/* <PhotoList data={this.state.photos} /> */}
-            <Route
-              exact
-              path="/"
-              element={
-                <PhotoList data={this.state.photos} title={this.state.query} />
-              }
-            />
+        <Routes>
+          {/* <PhotoList data={this.state.photos} /> */}
+          <Route
+            exact
+            path="/"
+            element={
+              <PhotoList data={this.state.photos} title={this.state.query} />
+            }
+          />
 
-            <Route
-              exact
-              path="/cats"
-              element={
-                <PhotoList data={this.state.cats} title={this.state.query} />
-              }
-            />
-            <Route
-              exact
-              path="/dogs"
-              element={
-                <PhotoList data={this.state.dogs} title={this.state.query} />
-              }
-            />
-            <Route
-              exact
-              path="/computers"
-              element={
-                <PhotoList
-                  data={this.state.computers}
-                  title={this.state.query}
-                />
-              }
-            />
-            <Route
-              exact
-              path="/:query"
-              element={<PhotoList results={this.state.photos} title={null} />}
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-      
+          <Route
+            exact
+            path="/cats"
+            element={
+              <PhotoList data={this.state.cats} title={this.state.query} />
+            }
+          />
+          <Route
+            exact
+            path="/dogs"
+            element={
+              <PhotoList data={this.state.dogs} title={this.state.query} />
+            }
+          />
+          <Route
+            exact
+            path="/computers"
+            element={
+              <PhotoList data={this.state.computers} title={this.state.query} />
+            }
+          />
+          <Route
+            exact
+            path="/:query"
+            element={<PhotoList results={this.state.photos} title={null} />}
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
     );
   }
 }
+
+export default App;

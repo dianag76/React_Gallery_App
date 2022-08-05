@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default class Search extends Component {
+ class Search extends Component {
   state = {
     searchText: "",
   };
@@ -13,8 +13,8 @@ export default class Search extends Component {
     e.preventDefault();
     this.props.onSearch(this.query.value);
     e.currentTarget.reset();
-    // let query= this.state.searchText;
-    // let path=`/search/${query}`;
+    let query= this.state.searchText;
+    let path=`/search/${query}`;
     this.props.history.push(path);
 
   };
@@ -51,3 +51,5 @@ svg"
     );
   }
 }
+
+export default Search;

@@ -6,32 +6,29 @@ import "./App.css";
 import Search from "./components/Search";
 import Nav from "./components/Nav";
 import PhotoList from "./components/PhotoList";
-// import NotFound from './components/NotFound';
 import NotFound from "./components/NotFound";
 
-// const url =
-// `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       photos: [],
-      dogs: [],
-      cats: [],
-      computers: [],
+      rain: [],
+      tree: [],
+      comet: [],
       query: "",
       loading: true,
     };
   }
   componentDidMount() {
     this.performSearch();
-    this.performSearch("cats");
-    this.performSearch("dogs");
-    this.performSearch("computers");
+    this.performSearch("rain");
+    this.performSearch("tree");
+    this.performSearch("comet");
   }
 
-  performSearch = (query = "cheese") => {
+  performSearch = (query = "nature") => {
     axios
       .get(
         `https://www.flickr.com/services/rest/?method=flickr.photos.
@@ -39,19 +36,19 @@ search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&
 nojsoncallback=1`
       )
       .then((response) => {
-        if (query === "cats") {
+        if (query === "rain") {
           this.setState({
-            cats: response.data.photos.photo,
+            apple: response.data.photos.photo,
             loading: false,
           });
-        } else if (query === "dogs") {
+        } else if (query === "tree") {
           this.setState({
-            dogs: response.data.photos.photo,
+            tree: response.data.photos.photo,
             loading: false,
           });
-        } else if (query === "computers") {
+        } else if (query === "comet") {
           this.setState({
-            computers: response.data.photos.photo,
+            comet: response.data.photos.photo,
             loading: false,
           });
         } else {
@@ -73,11 +70,7 @@ nojsoncallback=1`
       <div className="App">
         <Search onSearch={this.performSearch} />
         <Nav />
-        {/* {this.state.loading ? ( 
-               <p>Loading...</p>
-             ) : */}
         <Routes>
-          {/* <PhotoList data={this.state.photos} /> */}
           <Route
             exact
             path="/"
@@ -85,26 +78,25 @@ nojsoncallback=1`
               <PhotoList data={this.state.photos} title={this.state.query} />
             }
           />
-
           <Route
             exact
-            path="/cats"
+            path="/rain"
             element={
-              <PhotoList data={this.state.cats} title={this.state.query} />
+              <PhotoList data={this.state.apple} title={this.state.query} />
             }
           />
           <Route
             exact
-            path="/dogs"
+            path="/tree"
             element={
-              <PhotoList data={this.state.dogs} title={this.state.query} />
+              <PhotoList data={this.state.tree} title={this.state.query} />
             }
           />
           <Route
             exact
-            path="/computers"
+            path="/comet"
             element={
-              <PhotoList data={this.state.computers} title={this.state.query} />
+              <PhotoList data={this.state.comet} title={this.state.query} />
             }
           />
           <Route

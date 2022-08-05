@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import apiKey from "./components/config";
+import "./App.css";
 import Search from "./components/Search";
 import Nav from "./components/Nav";
 import PhotoList from "./components/PhotoList";
 // import NotFound from './components/NotFound';
-import apiKey from "./components/config";
 import NotFound from "./components/NotFound";
 
 // const url =
@@ -70,7 +70,7 @@ nojsoncallback=1`
   render() {
     console.log(this.state.photos);
     return (
-      <BrowserRouter>
+     
         <div className="App">
           <Search onSearch={this.performSearch} />
           <Nav />
@@ -118,7 +118,7 @@ nojsoncallback=1`
             <Route path="*"element={<NotFound/>}/>
           </Routes>
         </div>
-      </BrowserRouter>
+     
     );
   }
 }

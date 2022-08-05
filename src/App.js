@@ -86,6 +86,7 @@ nojsoncallback=1`
                 <PhotoList data={this.state.photos} title={this.state.query} />
               }
             />
+            
             <Route
               exact
               path="/cats"

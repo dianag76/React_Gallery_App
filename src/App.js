@@ -70,7 +70,6 @@ nojsoncallback=1`
   render() {
     console.log(this.state.photos);
     return (
-     
         <div className="App">
           <Search onSearch={this.performSearch} />
           <Nav />
@@ -86,7 +85,7 @@ nojsoncallback=1`
                 <PhotoList data={this.state.photos} title={this.state.query} />
               }
             />
-            
+
             <Route
               exact
               path="/cats"
@@ -105,20 +104,21 @@ nojsoncallback=1`
               exact
               path="/computers"
               element={
-                <PhotoList data={this.state.computers} title={this.state.query} />
+                <PhotoList
+                  data={this.state.computers}
+                  title={this.state.query}
+                />
               }
             />
             <Route
               exact
               path="/:query"
-              element={
-                <PhotoList results={this.state.photos} title={null} />
-              }
+              element={<PhotoList results={this.state.photos} title={null} />}
             />
-            <Route path="*"element={<NotFound/>}/>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
-     
+      
     );
   }
 }
